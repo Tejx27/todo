@@ -156,6 +156,23 @@ app.post("/delete", function(req, res){
 
 });
 
+
+// Code for show database in table formate
+
+
+app.get("/showList/db", async (req, res) => {
+  const items = await Item.find(); // Retrieve all items from the database
+  const lists = await List.find(); // Retrieve all lists from the database
+  res.render("Table.ejs", { items, lists }); // Render the 'all' EJS template and pass the items and lists data
+});
+
+
+
+
+
+
+// end table formate
+
 app.get("/about", function(req, res){
   res.render("about");
 });

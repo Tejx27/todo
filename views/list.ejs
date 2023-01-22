@@ -4,11 +4,14 @@
   <h1> <%= listTitle %> </h1>
 </div>
 
+
 <div class="newlist">
   <form class="" action="/customroute" method="post">
     <input type="text" name="newListInput" value="" placeholder="Create new list here..." class="newlistBtn">
     <button type="submit" name="createNewList">+</button>
   </form>
+  <form action="/table" method="get"></form>
+  <button id="showDB" class="animated-button" type="submit">BD</button>
 </div>
 
 <div class="box">
