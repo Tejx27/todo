@@ -9,29 +9,26 @@
     }
 </style>
 <h2 id="itemlist" class="text-center">Items</h2>
-<table class="table table-striped">
+<table class="table ">
     <tr>
-        <th>TODOS</th>
+        <th>Items</th>
         <th>Time1</th>
         <th>Time2</th>
     </tr>
-    <% for(var i=0; i < items.length; i++) { %>
-        <tr>
-            <td><%= items[i].name %></td>
-            <td><%= items[i].time %></td>
-            <td><%= items[i].time2 %></td>
-        </tr>
-    <% } %>
+    <%  mainLists.forEach(function(list){ %>
+        <th class="table-secondary"><%= list.name %></th>
+        <%  list.items.forEach(function(item){ %>
+            
+            <tr>
+                
+                <td><%= item.name %></td>
+                <td><%= item.time %></td>
+                <td><%= item.time2 %></td>
+            </tr>
+            
+        <% }) %>
+       
+    <% }) %>
 </table>
 
-<h2 id="itemlist" class="text-center">Lists</h2>
-<table class="table table-dark table-striped">
-    <tr>
-        <th>Name</th>
-    </tr>
-    <% for(var i=0; i < lists.length; i++) { %>
-        <tr>
-            <td><%= lists[i].name %></td>
-        </tr>
-    <% } %>
-</table>
+

@@ -36,6 +36,7 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
+
 const listSchema = {
   name: String,
   items: [itemsSchema]
@@ -50,7 +51,6 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
     res.redirect('/create');
-
 });
 
 app.get("/create", function(req, res) {
@@ -76,6 +76,7 @@ app.get("/create", function(req, res) {
 app.get("/:customListName", function(req, res){
   const customListName = _.capitalize(req.params.customListName);
 
+
   List.findOne({name: customListName}, function(err, foundList){
     if (!err){
       if (!foundList){
@@ -85,6 +86,10 @@ app.get("/:customListName", function(req, res){
           items: defaultItems
         });
         list.save();
+        List.deleteMany(({ name: "Favicon.ico"}),function(err){
+          console.log(err);
+          console.log("Data Deleted");
+    });
         res.redirect("/" + customListName);
       } else {
         //Show an existing list
@@ -129,6 +134,11 @@ app.post("/create", function(req, res){
 
 app.post("/customroute", function(req, res){
     const createNewListName='/'+req.body.newListInput;
+    if(createNewListName=="Favicon.ico"){
+      console.log("Favicon");
+      res.redirect(Today);
+    }
+    else
     res.redirect(createNewListName);
 });
 
@@ -157,15 +167,21 @@ app.post("/delete", function(req, res){
 });
 
 
+
 // Code for show database in table formate
 
 
 app.get("/showList/db", async (req, res) => {
-  const items = await Item.find(); // Retrieve all items from the database
-  const lists = await List.find(); // Retrieve all lists from the database
-  res.render("Table.ejs", { items, lists }); // Render the 'all' EJS template and pass the items and lists data
+
+  List.find({},function(err, listsArray){
+    res.render("Table.ejs", {mainLists: listsArray});
+  });
+   // Render the 'all' EJS template and pass the items and lists data
 });
 
+app.post("/ShowList/db",function(req,res){
+    res.redirect("/showList/db");
+});
 
 
 
