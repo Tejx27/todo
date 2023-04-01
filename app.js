@@ -183,15 +183,19 @@ app.post("/ShowList/db",function(req,res){
     res.redirect("/showList/db");
 });
 
-
-
-
-
 // end table formate
 
 app.get("/about", function(req, res){
   res.render("about");
 });
+app.get("/AddExtension/Extension", function(req, res){
+
+});
+
+app.post("/AddExtension/Extension",function(req, res){
+  res.render("AddExtension");
+});
+
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
